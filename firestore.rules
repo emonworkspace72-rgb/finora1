@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      match /accounts/{accountId} {
+        allow read, write: if isOwner(userId) &&
+          (request.resource == null || request.resource.data.userId == userId);
+      }
+
+      match /transactions/{transactionId} {
+        allow read, write: if isOwner(userId) &&
+          (request.resource == null || request.resource.data.userId == userId);
+      }
+
+      match /categories/{categoryId} {
+        allow read, write: if isOwner(userId) &&
+          (request.resource == null || request.resource.data.userId == userId);
+      }
+
+      match /budgets/{budgetId} {
+        allow read, write: if isOwner(userId) &&
+          (request.resource == null || request.resource.data.userId == userId);
+      }
+
+      match /savings_goals/{goalId} {
+        allow read, write: if isOwner(userId) &&
+          (request.resource == null || request.resource.data.userId == userId);
+      }
+
+      match /recurring_rules/{ruleId} {
+        allow read, write: if isOwner(userId) &&
+          (request.resource == null || request.resource.data.userId == userId);
+      }
+
+      match /preferences/{prefId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+  }
+}

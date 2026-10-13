@@ -1,0 +1,8 @@
+{
+  "firestore": [
+    {
+      "database": "ai-studio-android-finora-d2723553-c7e3-458d-ac58-f9907cdaf6d4",
+      "rules": "firestore.rules"
+    }
+  ]
+}

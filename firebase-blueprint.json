@@ -1,0 +1,96 @@
+{
+  "$schema": "https://firebase.google.com/schemas/firestore/blueprint.json",
+  "entities": {
+    "Account": {
+      "collection": "users/{userId}/accounts",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true },
+        "type": { "type": "string", "required": true },
+        "currency": { "type": "string", "required": true },
+        "openingBalanceCents": { "type": "number", "required": true },
+        "colorHex": { "type": "string", "required": false },
+        "isArchived": { "type": "boolean", "required": false },
+        "createdAt": { "type": "timestamp", "required": false },
+        "updatedAt": { "type": "timestamp", "required": false }
+      }
+    },
+    "Transaction": {
+      "collection": "users/{userId}/transactions",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "type": { "type": "string", "required": true },
+        "amountCents": { "type": "number", "required": true },
+        "currency": { "type": "string", "required": true },
+        "accountId": { "type": "string", "required": true },
+        "destinationAccountId": { "type": "string", "required": false },
+        "categoryId": { "type": "string", "required": true },
+        "dateMillis": { "type": "number", "required": true },
+        "note": { "type": "string", "required": false },
+        "merchant": { "type": "string", "required": false },
+        "recurringRuleId": { "type": "string", "required": false },
+        "createdAt": { "type": "timestamp", "required": false },
+        "updatedAt": { "type": "timestamp", "required": false }
+      }
+    },
+    "Category": {
+      "collection": "users/{userId}/categories",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true },
+        "type": { "type": "string", "required": true },
+        "iconName": { "type": "string", "required": true },
+        "colorHex": { "type": "string", "required": true },
+        "sortOrder": { "type": "number", "required": false },
+        "isDefault": { "type": "boolean", "required": false },
+        "createdAt": { "type": "timestamp", "required": false },
+        "updatedAt": { "type": "timestamp", "required": false }
+      }
+    },
+    "Budget": {
+      "collection": "users/{userId}/budgets",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true },
+        "limitCents": { "type": "number", "required": true },
+        "currency": { "type": "string", "required": true },
+        "period": { "type": "string", "required": true },
+        "categoryIds": { "type": "string", "required": true },
+        "carryOverPolicy": { "type": "string", "required": false },
+        "createdAt": { "type": "timestamp", "required": false },
+        "updatedAt": { "type": "timestamp", "required": false }
+      }
+    },
+    "SavingsGoal": {
+      "collection": "users/{userId}/savings_goals",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true },
+        "targetCents": { "type": "number", "required": true },
+        "allocatedCents": { "type": "number", "required": true },
+        "currency": { "type": "string", "required": true },
+        "targetDateMillis": { "type": "number", "required": false },
+        "linkedAccountId": { "type": "string", "required": false },
+        "createdAt": { "type": "timestamp", "required": false },
+        "updatedAt": { "type": "timestamp", "required": false }
+      }
+    },
+    "RecurringRule": {
+      "collection": "users/{userId}/recurring_rules",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true },
+        "amountCents": { "type": "number", "required": true },
+        "currency": { "type": "string", "required": true },
+        "frequency": { "type": "string", "required": true },
+        "nextDueMillis": { "type": "number", "required": true },
+        "accountId": { "type": "string", "required": true },
+        "categoryId": { "type": "string", "required": true },
+        "type": { "type": "string", "required": true },
+        "isBill": { "type": "boolean", "required": false },
+        "createdAt": { "type": "timestamp", "required": false },
+        "updatedAt": { "type": "timestamp", "required": false }
+      }
+    }
+  }
+}
